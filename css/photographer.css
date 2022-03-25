@@ -6,6 +6,35 @@
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+.profil-name {
+    font-size: 34px;
+    font-weight: 400;
+    color: #D3573C;
+    margin: 0;
+}
+
+.country-of-the-photographer {
+    font-size: 20px;
+    font-weight: 400;
+    color: #901C1C;
+    margin: 16px 0 19px 0;
+}
+
+.tagline-photographer {
+    color:#525252;
+    margin: 0;
+}
+
+.picture-profil-photographe {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
 }
 
 .contact_button {

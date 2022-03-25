@@ -12,7 +12,7 @@ function photographerFactory(data) {
         const paragraph_1 = document.createElement("p");
         const paragraph_2 = document.createElement("p");
         
-        link.setAttribute("href", `#`);
+        link.setAttribute("href", `./photographer.html?id=${id}`);
         link.setAttribute("aria-label", `${name}`)
         img.setAttribute("src", picture);
         img.setAttribute("alt", `Photo de profil ${name}`);
