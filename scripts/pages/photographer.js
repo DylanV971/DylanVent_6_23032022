@@ -18,11 +18,11 @@ async function getData(requested) {
 
 async function init() {
     const photographers = await getData(PHOTOGRAPHERS);
+    const medias = await getData(MEDIA);
+    console.log(medias); 
 
-   // Get the link and search on it.
     let params = new URLSearchParams(document.location.search);
 
-    //Get the id
     let id = params.get("id");
 
     /*
@@ -30,18 +30,20 @@ async function init() {
      with the id that is equal to the one in the URL 
     */
     const photographer = photographers.find(p => p.id == id);
+    const photographerMedia = medias.filter(media => media.photographerId == id);
     
-    /* 
-     Call the displayPhotographer function and pass the PHOTOGRAPHERS 
-     ariable as argument  
-    */
-   
+    for (const media of photographerMedia) {
+        console.log(media)
+        mediaDisplay(media) 
+    }
+    
     displayPhotographer(photographer);
 };
 
 init();
 
 function displayPhotographer(photographer) {
+    //console.log(photographer);
     let h1 = document.querySelector(".profil-name");
     let paragraph_1 = document.querySelector(".country-of-the-photographer");
     let paragraph_2 = document.querySelector(".tagline-photographer");
@@ -50,7 +52,38 @@ function displayPhotographer(photographer) {
     h1.textContent = photographer.name;
     paragraph_1.textContent = `${photographer.city}, ${photographer.country}`;
     paragraph_2.textContent = `${photographer.tagline}`;
-    img.setAttribute("src", `./assets/photographers/${photographer.portrait}`)
-    img.setAttribute("alt", `${photographer.name}`)
-    console.log(h1)
+    img.setAttribute("src", `./assets/photographers/${photographer.portrait}`);
+    img.setAttribute("alt", `${photographer.name}`);
+
 };
+
+function mediaDisplay(media) {
+    console.log(media)
+    let containerGallery = document.querySelector(".gallery");
+    let figure = document.createElement("figure");
+    let link = document.createElement("a");
+    let img = document.createElement("img");
+    let figcaption = document.createElement("figcaption");
+    let divlike = document.createElement("div");
+    let iconlike = document.createElement("img");
+
+    link.setAttribute("href","#");
+    img.setAttribute("class", "pictures-photographer");
+    img.setAttribute("src", `./assets/media/${media.image}`);
+    figcaption.textContent = media.title;
+    divlike.textContent = media.likes;
+    divlike.setAttribute("class", "likes");
+    divlike.setAttribute("aria-label", "likes");
+    iconlike.setAttribute("src", `./assets/icons/like.svg`);
+
+    link.appendChild(img)
+    figure.appendChild(link)
+
+    divlike.appendChild(iconlike);
+    figcaption.appendChild(divlike);
+
+    figure.appendChild(figcaption);
+
+    containerGallery.appendChild(figure);
+};
+
